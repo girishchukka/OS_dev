@@ -13,3 +13,6 @@ make install-target-gcc
 
 Setting environment path for getting i586-elf-ld/as/gcc
 export PATH="$HOME/opt/cross/bin:$PATH"
+
+Install QEMU and test the OS using below
+qemu-system-i386 -cdrom myos.iso
