@@ -72,8 +72,21 @@ void terminal_putentryat(char c, uint8_t color, size_t x, size_t y)
 	terminal_buffer[index] = make_vgaentry(c, color);
 }
 
+void terminal_scroll_up()
+{
+	for(size_t i=0; i< ((terminal_row + 1) * VGA_WIDTH); i++)
+		terminal_buffer[i] = terminal_buffer[i + VGA_WIDTH];
+
+	terminal_row--;
+}
+
 void terminal_putchar(char c)
 {
+	if(terminal_row > VGA_HEIGHT - 6)
+	{
+		terminal_scroll_up();
+	}
+
 	if(c == '\n')
 	{
 		terminal_row++;
@@ -101,5 +114,9 @@ void terminal_writestring(const char* data)
 void kmain()
 {
 	terminal_initialize();
-	terminal_writestring("Hello, kernel World!\nI'm girish chukka\nThis is first operating system developed by me\n");
+
+	terminal_writestring("1. Hello, kernel World!\n2. I'm a developer\n3. This is my OS - under dev\n4. This is 4th line\n");
+	terminal_writestring("5. The basic VGA display's address starts at 0xB8000\n");
+	terminal_writestring("6. \n7. \n 8. \n9. \n10. \n 11 \n 12 \n 13 \n 14 \n 15 \n 16 \n 17 \n 18 \n 19 \n");
+	terminal_writestring(" 20 \n 21 \n 22 \n 23 \n 24 \n 25 \n 26 \n 27 \n 28 \n 29 \n 30 \n 31 \n 32 \n 33 \n");
 }
